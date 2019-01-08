@@ -45,5 +45,5 @@ if __name__ == "__main__":
 				print("Password is :"+passwd)
 				exit()
 			else:
-				print("Failed")
+				print(get_auth_token(e2,passwd))
 	else: exit()
